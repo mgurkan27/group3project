@@ -12,10 +12,6 @@ resource "aws_launch_configuration" "group3_web_lc" {
   lifecycle {
     create_before_destroy = true
   }
-  tag {
-      key                 = "Name"
-      value               = "group3_web_lc" 
-  }
 }
 
 
