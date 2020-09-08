@@ -50,3 +50,9 @@ asg_app_min          = "1"
 asg_app_grace        = "400"
 asg_app_hct          = "ELB"
 asg_app_cap          = "1"
+
+ 
+alarms_sms  = "+12026300504"
+
+zone_id = "Z04238323JL5U5NJRKE1L"
+  

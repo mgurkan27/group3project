@@ -52,11 +52,8 @@ variable "asg_app_grace" {}
 variable "asg_app_hct" {}
 variable "asg_app_cap" {}
 
-variable "zone_id" {
-  type        = string
-  default     = "Z04238323JL5U5NJRKE1L"
-  description = "Zone ID."
-}
+variable "zone_id" 
+ 
 variable "alias" {
   type        = map
   default     = {}
@@ -77,3 +74,5 @@ variable ssh_priv_key {
   description = "Default pub key"
 }
 
+variable "alarms_sms" 
+ 
