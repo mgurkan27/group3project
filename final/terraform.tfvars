@@ -2,7 +2,7 @@ aws_region     = "us-west-1"
 aws_profile    = "terraform"
 aws_access_key = ""   #needs key values and ask where to put instead here.
 aws_secret_key = ""
-key_name       = "new_account_1" #use your key
+key_name       = "us-west-1" #use your key
 vpc_cidr       = "10.0.0.0/16"
 
 
@@ -32,9 +32,6 @@ elb_timeout             = "10"
 elb_drain_timeout       = "400"
 elb_idle_timeout        = "60"
 
-
-
-#web_ami              = "ami-09d95fab7fff3776c"
 web_lc_instance_type = "t2.micro"
 asg_web_max          = "2"
 asg_web_min          = "1"
@@ -42,8 +39,6 @@ asg_web_grace        = "400"
 asg_web_hct          = "ELB"
 asg_web_cap          = "1"
 
-
-#app_ami              = "ami-09d95fab7fff3776c"
 app_lc_instance_type = "t2.micro"
 asg_app_max          = "2"
 asg_app_min          = "1"
@@ -51,8 +46,8 @@ asg_app_grace        = "400"
 asg_app_hct          = "ELB"
 asg_app_cap          = "1"
 
- 
-alarms_sms  = "+12026300504"
+alarms_sms  = "+"
 
 zone_id = "Z04238323JL5U5NJRKE1L"
+route53_dns = "gurkancloud.com"
   

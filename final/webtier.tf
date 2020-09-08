@@ -14,7 +14,6 @@ resource "aws_launch_configuration" "group3_web_lc" {
   }
 }
 
-
 resource "aws_autoscaling_group" "group3_web_asg" {
   max_size                  = var.asg_web_max
   min_size                  = var.asg_web_min

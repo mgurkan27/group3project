@@ -52,7 +52,8 @@ variable "asg_app_grace" {}
 variable "asg_app_hct" {}
 variable "asg_app_cap" {}
 
-variable "zone_id" 
+variable "zone_id" {}
+variable "route53_dns" {}
  
 variable "alias" {
   type        = map
@@ -74,5 +75,5 @@ variable ssh_priv_key {
   description = "Default pub key"
 }
 
-variable "alarms_sms" 
+variable "alarms_sms" {}
  
