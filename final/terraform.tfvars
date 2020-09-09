@@ -4,7 +4,7 @@ aws_access_key = ""   #needs key values and ask where to put instead here.
 aws_secret_key = ""
 key_name       = "us-west-1" #use your key
 vpc_cidr       = "10.0.0.0/16"
-
+#avaliability_zones = ["us-west-1a","us-west-1b"]
 
 cidrs = {
   public1  = "10.0.1.0/24"
@@ -25,10 +25,10 @@ db_password       = "12345678"
 db_bak_retention  = "4"
 db_port           = 3306
 
-elb_healthy_threshold   = "5"
-elb_unhealthy_threshold = "5"
-elb_interval            = "30"
-elb_timeout             = "10"
+elb_healthy_threshold   = "3"
+elb_unhealthy_threshold = "10"
+elb_interval            = "10"
+elb_timeout             = "5"
 elb_drain_timeout       = "400"
 elb_idle_timeout        = "60"
 
@@ -46,7 +46,7 @@ asg_app_grace        = "400"
 asg_app_hct          = "ELB"
 asg_app_cap          = "1"
 
-alarms_sms  = "+"
+alarms_sms  = "+999999999999"
 
 zone_id = "Z04238323JL5U5NJRKE1L"
 route53_dns = "gurkancloud.com"
