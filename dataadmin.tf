@@ -3,8 +3,8 @@ resource "aws_iam_group_membership" "DBAdmin" {
   name = "DBAdmin"
   users = [
 
-     aws_iam_user.DBAdmin1.name,
-     aws_iam_user.DBAdmin2.name,
+    aws_iam_user.DBAdmin1.name,
+    aws_iam_user.DBAdmin2.name,
 
   ]
   group = aws_iam_group.DBAdmin.name
@@ -18,19 +18,28 @@ resource "aws_iam_user" "DBAdmin1" {
 resource "aws_iam_user" "DBAdmin2" {
   name = "DBAdmin2"
 }
+resource "aws_iam_user_login_profile" "DBAdmin1" {
+  user            = "DBAdmin1"
+  pgp_key         = "keybase:maximfloreagmail" #Keybase:example --example means the account name of the user with the pgp key
+  password_length = 10
+}
+resource "aws_iam_user_login_profile" "DBAdmin2" {
+  user            = "DBAdmin2"
+  pgp_key         = "keybase:maximfloreagmail" #Keybase:example --example means the account name of the user with the pgp key
+  password_length = 10
+}
 resource "aws_iam_account_password_policy" "strict" {
- require_lowercase_characters   = true
- require_numbers                = true
- require_uppercase_characters   = true
- require_symbols                = true
- max_password_age               = 90
- password_reuse_prevention      = 3
- minimum_password_length        = 8
+  require_lowercase_characters = true
+  require_numbers              = true
+  require_uppercase_characters = true
+  require_symbols              = true
+  max_password_age             = 90
+  password_reuse_prevention    = 3
+  minimum_password_length      = 8
 }
 resource "aws_iam_group_policy" "DBAdmin_policy" {
-  name  = "DBAdmin_policy"
-<<<<<<< HEAD
-  group = aws_iam_group.DBAdmin.name
+  name   = "DBAdmin_policy"
+  group  = aws_iam_group.DBAdmin.name
   policy = <<EOF
 {
     "Version": "2012-10-17",

@@ -16,9 +16,23 @@ resource "aws_iam_user" "SysAdmin1" {
 resource "aws_iam_user" "SysAdmin2" {
   name = "SysAdmin2"
 }
+
+resource "aws_iam_user_login_profile" "SysAdmin1" {
+  user            = "SysAdmin1"
+  pgp_key         = "keybase:maximfloreagmail" #Keybase:example --example means the account name of the user with the pgp key
+  password_length = 10
+}
+
+resource "aws_iam_user_login_profile" "SysAdmin2" {
+  user            = "SysAdmin2"
+  pgp_key         = "keybase:maximfloreagmail" #Keybase:example --example means the account name of the user with the pgp key
+  password_length = 10
+}
+
 resource "aws_iam_group_policy" "SysAdmin_policy" {
   name  = "SysAdmin_policy"
   group = aws_iam_group.SysAdmin.id
+
   policy = <<EOF
 {
     "Statement": [

@@ -24,10 +24,30 @@ resource "aws_iam_user" "Monitor3" {
 resource "aws_iam_user" "Monitor4" {
   name = "Monitor4"
 }
+resource "aws_iam_user_login_profile" "Monitor1" {
+  user            = "Monitor1"
+  pgp_key         = "keybase:maximfloreagmail" #Keybase:example --example means the account name of the user with the pgp key
+  password_length = 10
+}
+resource "aws_iam_user_login_profile" "Monitor2" {
+  user            = "Monitor2"
+  pgp_key         = "keybase:maximfloreagmail"
+  password_length = 10
+}
+resource "aws_iam_user_login_profile" "Monitor3" {
+  user            = "Monitor3"
+  pgp_key         = "keybase:maximfloreagmail"
+  password_length = 10
+}
+resource "aws_iam_user_login_profile" "Monitor4" {
+  user            = "Monitor4"
+  pgp_key         = "keybase:maximfloreagmail"
+  password_length = 10
+}
 
 resource "aws_iam_group_policy" "Monitor_policy" {
-  name  = "Monitor_policy"
-  group = aws_iam_group.Monitor.id
+  name   = "Monitor_policy"
+  group  = aws_iam_group.Monitor.id
   policy = <<EOF
 {
     "Version": "2012-10-17",
