@@ -1,17 +1,23 @@
 Create Password for IAM_USER using Terraform Decode and Decrypt data into Password
 
 Need to install Keybase in our local
+
 Need to create Keybase key by using "keybase pgp gen"
+
 Then give the reference of this Keybase key in your terraform code Keybase:username_of_keybase # Look into SysAdmin.tf
+
 Then terraform apply
+
 Then we need to get the decrypted password with the command "terraform output password | base64 --decode | keybase pgp decrypt" # Linux command ❗
 
 To Decode:
+
 Set-Content -Path .\secret.b64 -Value $(terraform output AWS_Secret_Access_Key)  # Creating a variable with output of encrypted password
 
 certutil -decode .\example1 .\example2 # Powershell command for decode the password for the iam_user
 
 example1 = file with encryption 
+
 example2 = new file for store decode data
 
 keybase pgp decrypt -i example2.txt # Keybase command to decrypt example2.txt ( will show a passowrd here) 
