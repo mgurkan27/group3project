@@ -1,8 +1,6 @@
 # Terraform_create_password_iam_user
 Create Password for IAM_USER using Terraform
 
-Creating password for user in Terraform
-
 To Decode
 terraform output encrypted_secret | base64 --decode | keybase pgp decrypt  # Linux command for decrypting the password
 
