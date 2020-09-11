@@ -1,4 +1,5 @@
 
+provider "aws" {}
 resource "aws_iam_group_membership" "SysAdmin" {
   name = "SysAdmin"
   users = [

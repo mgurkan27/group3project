@@ -1,7 +1,7 @@
 aws_region     = "us-west-1"
 aws_profile    = "terraform"
 
-key_name       = "us-west-1" #use your key
+key_name       = "us-west-1"     #use your key
 vpc_cidr       = "10.0.0.0/16"
 
 cidrs = {
@@ -23,7 +23,7 @@ db_password       = "12345678"
 db_bak_retention  = "4"
 db_port           = 3306
 
-elb_healthy_threshold   = "3"
+elb_healthy_threshold   = "5"
 elb_unhealthy_threshold = "10"
 elb_interval            = "10"
 elb_timeout             = "5"

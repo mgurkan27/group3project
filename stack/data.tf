@@ -5,5 +5,5 @@ data "aws_ami" "linux-ami-id" {
     name   = "name"
     values = ["amzn2-ami-hvm*"]
   }
-  owners = ["your-account-id"]  # Canonical
+  #owners = ["your-account-id"]  # Canonical
 }

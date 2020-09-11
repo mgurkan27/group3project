@@ -14,6 +14,5 @@ wget https://s3.amazonaws.com/bucketforwordpresslab-donotdelete/htaccess.txt
 mv htaccess.txt .htaccess
 chkconfig httpd on
 service httpd start
-      
 
  

@@ -13,7 +13,7 @@ resource "aws_iam_policy" "s3-policy" {
       ],
       "Effect": "Allow",
       "Resource": [
-          "${module.group3-s3-utility-bucket-test.bucket_arn}",
+           "${module.group3-s3-utility-bucket-test.bucket_arn}",
           "${module.group3-s3-utility-bucket-test.bucket_arn}/*"
       ]
     }

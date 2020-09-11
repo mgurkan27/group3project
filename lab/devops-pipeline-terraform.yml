@@ -7,13 +7,13 @@ Parameters:
     Type: String
   GitHubOwner:
     Type: String
-    Default: git username # change this with your ownername
+    Default: mgurkan27 # change this with your ownername
   GitHubRepo:
     Type: String
     Default: terraform-based-pipeline
   GitHubToken:
     Type: String
-    Default: git token # use your auth token
+    Default: 3d798dbd3c651695c57760846f31220c71c37458 # use your auth token
 Resources:
   SampleBuildProject:
     Properties:
