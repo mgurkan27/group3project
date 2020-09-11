@@ -62,15 +62,6 @@ variable stack {
   default     = "terraform"
 }
 
-variable ssh_key {
-  default     = "~/.ssh/id_rsa.pub"
-  description = "Default pub key"
-}
-
-variable ssh_priv_key {
-  default     = "~/.ssh/id_rsa"
-  description = "Default pub key"
-}
 
 variable "alarms_sms" {}
  
