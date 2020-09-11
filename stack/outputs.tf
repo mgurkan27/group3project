@@ -16,3 +16,9 @@ output "password_Monitor3" {
 output "password_Monitor4" {
   value = aws_iam_user_login_profile.Monitor4.encrypted_password
 }
+output "password_DBAdmin1" {
+  value = aws_iam_user_login_profile.DBAdmin1.encrypted_password
+}
+output "password_DBAdmin2" {
+  value = aws_iam_user_login_profile.DBAdmin2.encrypted_password
+}

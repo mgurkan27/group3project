@@ -1,0 +1,75 @@
+Parameters:
+  BuildSpecPath:
+    Default: buildspec.yml
+    Type: String
+  GitHubBranch:
+    Default: master
+    Type: String
+  GitHubOwner:
+    Type: String
+    Default: git username # change this with your ownername
+  GitHubRepo:
+    Type: String
+    Default: terraform-based-pipeline
+  GitHubToken:
+    Type: String
+    Default: git token # use your auth token
+Resources:
+  SampleBuildProject:
+    Properties:
+      Artifacts:
+        Type: CODEPIPELINE
+      Environment:
+        ComputeType: BUILD_GENERAL1_SMALL
+        EnvironmentVariables:
+          - Name: S3_BUCKET
+            Value: !ImportValue 'devops-bucket-name'
+        Image: aws/codebuild/amazonlinux2-x86_64-standard:1.0
+        Type: LINUX_CONTAINER
+      Name: devops-codepipeline-project
+      ServiceRole: !ImportValue 'devops-codebuild-service-role-arn'
+      Source:
+        BuildSpec: !Ref 'BuildSpecPath'
+        Type: CODEPIPELINE
+    Type: AWS::CodeBuild::Project
+  SamplePipeline:
+    Properties:
+      ArtifactStore:
+        Location: !ImportValue 'devops-bucket-name'
+        Type: S3
+      RoleArn: !ImportValue 'devops-codepipeline-service-role-arn'
+      Stages:
+        - Actions:
+            - ActionTypeId:
+                Category: Source
+                Owner: ThirdParty
+                Provider: GitHub
+                Version: '1'
+              Configuration:
+                Branch: !Ref 'GitHubBranch'
+                OAuthToken: !Ref 'GitHubToken'
+                Owner: !Ref 'GitHubOwner'
+                Repo: !Ref 'GitHubRepo'
+              Name: App
+              OutputArtifacts:
+                - Name: MyApp
+          Name: Source
+        - Actions:
+            - ActionTypeId:
+                Category: Build
+                Owner: AWS
+                Provider: CodeBuild
+                Version: '1'
+              Configuration:
+                ProjectName: !Ref 'SampleBuildProject'
+              InputArtifacts:
+                - Name: MyApp
+              Name: Build
+              OutputArtifacts:
+                - Name: MyBuild
+              RunOrder: 1
+          Name: Build
+    Type: AWS::CodePipeline::Pipeline
+
+
+      #git checkout -b feature/deploy-tf

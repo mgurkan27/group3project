@@ -1,0 +1,107 @@
+Resources:
+  DevopsBucket:
+    Properties:
+      BucketName: !Sub 'devops-bucket-${AWS::AccountId}'  
+    Type: AWS::S3::Bucket
+    
+  DevopsCloudFormationServiceRole:
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action:
+              - sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: cloudformation.amazonaws.com
+      Path: /
+      Policies:
+        - PolicyDocument:
+            Statement:
+              - Action:
+                  - cloudformation:*
+                  - iam:*
+                  - lambda:*
+                  - s3:*
+                  - ec2:*
+                Effect: Allow
+                Resource:
+                  - '*'
+            Version: '2012-10-17'
+          PolicyName: devops-cloudformation-policy
+      RoleName: devops-cloudformation-service-role
+    Type: AWS::IAM::Role
+   
+  DevopsCodeBuildServiceRole:
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action:
+              - sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: codebuild.amazonaws.com
+      Path: /
+      Policies:
+        - PolicyDocument:
+            Statement:
+              - Action:
+                  - logs:*
+                  - s3:*
+                  - cloudformation:*
+                  - ec2:*
+                Effect: Allow
+                Resource:
+                  - '*'
+            Version: '2012-10-17'
+          PolicyName: devops-codebuild-policy
+      RoleName: devops-codebuild-service-role
+    Type: AWS::IAM::Role
+    
+  DevopsCodePipelineServiceRole:
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action:
+              - sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: codepipeline.amazonaws.com
+      Path: /
+      Policies:
+        - PolicyDocument:
+            Statement:
+              - Action:
+                  - cloudformation:*
+                  - codebuild:*
+                  - iam:*
+                  - s3:*
+                Effect: Allow
+                Resource:
+                  - '*'
+            Version: '2012-10-17'
+          PolicyName: devops-codepipeline-policy
+      RoleName: devops-codepipeline-service-role
+    Type: AWS::IAM::Role
+    
+Outputs:
+  DevopsBucketArn:
+    Export:
+      Name: devops-bucket-arn
+    Value: !GetAtt 'DevopsBucket.Arn'
+  DevopsBucketName:
+    Export:
+      Name: devops-bucket-name
+    Value: !Ref 'DevopsBucket'
+  DevopsCloudFormationServiceRole:
+    Export:
+      Name: devops-cloudformation-service-role-arn
+    Value: !GetAtt 'DevopsCloudFormationServiceRole.Arn'
+  DevopsCodeBuildServiceRole:
+    Export:
+      Name: devops-codebuild-service-role-arn
+    Value: !GetAtt 'DevopsCodeBuildServiceRole.Arn'
+  DevopsCodePipelineServiceRole:
+    Export:
+      Name: devops-codepipeline-service-role-arn
+    Value: !GetAtt 'DevopsCodePipelineServiceRole.Arn'
+  
