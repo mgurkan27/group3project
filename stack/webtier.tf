@@ -13,7 +13,44 @@ resource "aws_launch_configuration" "group3_web_lc" {
     create_before_destroy = true
   }
 }
+resource "aws_security_group" "group3_web_lc_sg" {
+  name        = "group3_web_lc_sg"
+  description = "Used by lc for public access to web servers"
+  vpc_id      = aws_vpc.group3_vpc.id
 
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    from_port   = -1
+    to_port     = -1
+    protocol    = "icmp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+resource "aws_security_group_rule" "opened_to_lb" {
+  type                     = "ingress"
+  from_port                = 80
+  to_port                  = 80
+  protocol                 = "tcp"
+  source_security_group_id = aws_security_group.group3_web_sg.id
+  security_group_id        = aws_security_group.group3_web_lc_sg.id
+}
 resource "aws_autoscaling_group" "group3_web_asg" {
   max_size                  = var.asg_web_max
   min_size                  = var.asg_web_min
@@ -44,12 +81,6 @@ resource "aws_security_group" "group3_web_sg" {
   ingress {
     from_port   = 80
     to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  ingress {
-    from_port   = 22
-    to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
