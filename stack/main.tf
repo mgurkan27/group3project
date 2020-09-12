@@ -4,13 +4,13 @@
 # data "aws_caller_identity" "current" {}
 
 
-# module "group3-s3-utility-bucket-test" {
-#   source      = "./module/s3"
-#   bucket_name = "group3-s3-utility-bucket-test"
-#   s3_tags = {
-#     Name = "group3-s3-utility-bucket-test"
-#   }
-# }
+module "group3-s3-utility-bucket-test" {
+  source      = "./module/s3"
+  bucket_name = "group3-s3-utility-bucket-test"
+  s3_tags = {
+    Name = "group3-s3-utility-bucket-test"
+  }
+}
 
 # resource "aws_key_pair" "key_name" {
 #   key_name = var.key_name
