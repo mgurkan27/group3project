@@ -7,13 +7,13 @@ Parameters:
     Type: String
   GitHubOwner:
     Type: String
-    Default: mgurkan27 # change this with your ownername
+    Default:  # change this with your ownername
   GitHubRepo:
     Type: String
     Default: group3project
   GitHubToken:
     Type: String
-    Default: 3a174bfef79508ea172538d94f259835e26eeaa1 # use your auth token
+    Default:  # use your auth token
 Resources:
   SampleBuildProject:
     Properties:
