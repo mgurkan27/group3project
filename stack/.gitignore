@@ -32,3 +32,7 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+
+role-and-bucket.yml
+devops-pipeline-terraform.yml
+us-west-1.pem

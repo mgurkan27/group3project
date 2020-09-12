@@ -1,20 +1,16 @@
 
 # Creation of S3
+   # Attach account number to bucket name.
+   #data "aws_caller_identity" "current" {}
+   #module "group3-s3-utility-bucket-test-${data.aws_caller_identity.current.account_id}"
 
-# data "aws_caller_identity" "current" {}
-
-
-module "group3-s3-utility-bucket-test" {
+  module "group3-s3-utility-bucket-test" {
   source      = "./module/s3"
   bucket_name = "group3-s3-utility-bucket-test"
   s3_tags = {
     Name = "group3-s3-utility-bucket-test"
   }
 }
-
-# resource "aws_key_pair" "key_name" {
-#   key_name = var.key_name
-# }
 
 #--- VPC ---
 

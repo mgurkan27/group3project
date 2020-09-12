@@ -6,10 +6,10 @@ resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
 }
 resource "aws_cloudfront_distribution" "s3_distribution_task" {
   origin {
-    domain_name = module.group3-s3-utility-bucket-test.bucket_domain_name
-    origin_id   = module.group3-s3-utility-bucket-test.bucket_id 
+    domain_name = module.group3-s3-utility-bucket-test.domain_name
+    origin_id   = module.group3-s3-utility-bucket-test.id 
     s3_origin_config {
-      # origin_access_identity = "origin-access-identity/cloudfront/ABCDEFG1234567"
+      #origin_access_identity = "origin-access-identity/cloudfront/ABCDEFG1234567"
       origin_access_identity = aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path
     }
   }
@@ -19,7 +19,7 @@ resource "aws_cloudfront_distribution" "s3_distribution_task" {
   default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
     cached_methods   = ["GET", "HEAD"]
-    target_origin_id = module.group3-s3-utility-bucket-test.bucket_id 
+    target_origin_id = module.group3-s3-utility-bucket-test.id 
     forwarded_values {
       query_string = false
       cookies {
@@ -36,7 +36,7 @@ resource "aws_cloudfront_distribution" "s3_distribution_task" {
     path_pattern     = "/content/immutable/*"
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD", "OPTIONS"]
-    target_origin_id = module.group3-s3-utility-bucket-test.bucket_id 
+    target_origin_id = module.group3-s3-utility-bucket-test.id 
     forwarded_values {
       query_string = false
       headers      = ["Origin"]
@@ -71,7 +71,7 @@ resource "aws_cloudfront_distribution" "s3_distribution_task" {
 data "aws_iam_policy_document" "s3_policy" {
   statement {
     actions   = ["s3:GetObject"]
-    resources = ["${module.group3-s3-utility-bucket-test.bucket_arn}/*"]
+    resources = ["${module.group3-s3-utility-bucket-test.arn}/*"]
     principals {
       type        = "AWS"
       identifiers = ["${aws_cloudfront_origin_access_identity.origin_access_identity.iam_arn}"]
@@ -79,6 +79,6 @@ data "aws_iam_policy_document" "s3_policy" {
   }
 }
 resource "aws_s3_bucket_policy" "s3BucketPolicy" {
-  bucket = aws_s3_bucket.group3-s3-utility-bucket-test.bucket_id 
+  bucket = aws_s3_bucket.group3-s3-utility-bucket-test.id 
   policy = data.aws_iam_policy_document.s3_policy.json
 }
