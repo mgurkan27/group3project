@@ -10,10 +10,10 @@ Parameters:
     Default: mgurkan27 # change this with your ownername
   GitHubRepo:
     Type: String
-    Default: terraform-based-pipeline
+    Default: group3project
   GitHubToken:
     Type: String
-    Default: 3d798dbd3c651695c57760846f31220c71c37458 # use your auth token
+    Default: 3a174bfef79508ea172538d94f259835e26eeaa1 # use your auth token
 Resources:
   SampleBuildProject:
     Properties:
