@@ -36,3 +36,4 @@ terraform.rc
 role-and-bucket.yml
 devops-pipeline-terraform.yml
 us-west-1.pem
+provider.tf
